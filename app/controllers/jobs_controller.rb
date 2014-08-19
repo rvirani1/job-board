@@ -1,4 +1,8 @@
 class JobsController < ApplicationController
+  def show
+    @job = Job.find params[:id]
+  end
+
   def new
     @job = Job.new(
       start_date: Time.now,
@@ -7,7 +11,10 @@ class JobsController < ApplicationController
   end
 
   def create
-    @job = Job.new create_params
+    # This does not set user_id to correspond to current user
+    #   @job = Job.new create_params
+    # This sets user_id for the newly created job
+    @job = current_user.jobs.new create_params
     if @job.save
       # Saved the record, now show it?
       # By redirecting to the show action

@@ -22,4 +22,8 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
+  # This defines user.jobs to be the relation of all of this
+  #   user's jobs
+  has_many :jobs
 end

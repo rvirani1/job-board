@@ -13,5 +13,11 @@
 #
 
 class Job < ActiveRecord::Base
-  validates_presence_of :title, :description
+  validates_presence_of :title, :description, :user_id
+
+  # belongs_to :user
+  # ^- would define job.user
+  def author
+    User.find self.user_id
+  end
 end
