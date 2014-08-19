@@ -1,4 +1,9 @@
 class JobsController < ApplicationController
+  # Provided by Devise
+  # Redirects to login if not logged in already
+  before_action :authenticate_user!, except: [:show]
+  # before_action :authenticate_user!, only: [:new, :create]
+
   def show
     @job = Job.find params[:id]
   end
