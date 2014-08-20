@@ -5,7 +5,7 @@ class JobsController < ApplicationController
   # before_action :authenticate_user!, only: [:new, :create]
 
   def index
-    @jobs = Job.active
+    @jobs = Job.all - current_user.read_jobs 
   end
 
   def show
