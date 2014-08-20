@@ -1,0 +1,16 @@
+- if current_user
+  = link_to "Post New Job", new_job_path, class: "btn btn-primary"
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th Title
+      %th Posted By
+      %th Active Until
+  %tbody
+    - @jobs.each do |job|
+      %tr
+        %td= link_to job.title, job
+        %td= job.author.email
+        %td= job.end_date
+
