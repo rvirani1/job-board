@@ -26,4 +26,8 @@ class User < ActiveRecord::Base
   # This defines user.jobs to be the relation of all of this
   #   user's jobs
   has_many :jobs
+
+  def has_favorited?(job)
+    raise "FIXME"
+  end
 end
