@@ -1,7 +1,8 @@
-%h1= @job.title
+= link_to "Back", jobs_path, class: "btn btn-default"
 
-%h3 Description
-%p= @job.description
+%h1
+  = @job.title
+  %small= @job.author.email
 
-%h3 Posted By
-%p= @job.author.email
+.well
+  = @job.description
