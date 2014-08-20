@@ -26,4 +26,11 @@ class User < ActiveRecord::Base
   # This defines user.jobs to be the relation of all of this
   #   user's jobs
   has_many :jobs
+
+  # Defines user.favorites
+  has_many :favorites
+  has_many :favorited_jobs, through: :favorites,
+    source: :job
+  # ^- we want this to describe jobs that the user
+  #   has favorited, but there is a name collision
 end
