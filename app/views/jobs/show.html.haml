@@ -1,4 +1,10 @@
 = link_to "Back", jobs_path, class: "btn btn-default"
+- if current_user.has_favorited?(@job)
+  = link_to job_favorites_path(@job), class: "btn btn-danger", method: :delete do
+    %i.fa.fa-star-o
+- else
+  = link_to job_favorites_path(@job), class: "btn btn-success", method: :post do
+    %i.fa.fa-star
 
 / Ruby function that generates an a tag
 - if current_user == @job.author

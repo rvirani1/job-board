@@ -27,7 +27,15 @@ class User < ActiveRecord::Base
   #   user's jobs
   has_many :jobs
 
+  # Defines user.favorites
+  has_many :favorites
+  has_many :favorited_jobs, through: :favorites,
+    source: :job
+  # ^- we want this to describe jobs that the user
+  #   has favorited, but there is a name collision
+
   def has_favorited?(job)
-    raise "FIXME"
+    # favorited_jobs.to_a.any? { |fav| fav.job == job }
+    favorites.where(job: job).exists?
   end
 end
