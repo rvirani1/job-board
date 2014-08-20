@@ -10,6 +10,12 @@ class JobsController < ApplicationController
 
   def show
     @job = Job.find params[:id]
+    if !current_user.has_read? @job
+      r = Read.new
+      r.job_id = @job.id
+      r.user_id = current_user.id
+      r.save!
+    end
   end
 
   def new
