@@ -34,8 +34,16 @@ class User < ActiveRecord::Base
   # ^- we want this to describe jobs that the user
   #   has favorited, but there is a name collision
 
+  has_many :reads
+  has_many :read_jobs, through: :reads, source: :job
+
   def has_favorited?(job)
     # favorited_jobs.to_a.any? { |fav| fav.job == job }
     favorites.where(job: job).exists?
   end
+
+  def has_read?(job)
+    reads.where(job: job).exists?
+  end
+
 end
