@@ -2,22 +2,33 @@
 %html
   %head
     %title JobBoard
+    = stylesheet_link_tag "//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"
+    = stylesheet_link_tag "//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"
     = stylesheet_link_tag 'application', media: 'all'
+
     = javascript_include_tag 'application'
     = csrf_meta_tags
 
   %body
-    %nav
-      %ul
-        - if current_user
-          / Signed in
-          %li= current_user.email
-          %li= link_to "Log out", destroy_user_session_path, method: :delete
-        - else
-          / Not signed in
-          %li= link_to "Log in", new_user_session_path
+    %nav.navbar.navbar-default
+      .container
+        .navbar-header
+          = link_to "ATLRUG Jobs", root_path, class: "navbar-brand"
 
-    %p.notice= notice
-    %p.alert= alert
+        %ul.nav.navbar-nav
+          / Main links will go here
 
-    = yield
+        %ul.nav.navbar-nav.pull-right
+          - if current_user
+            / Signed in
+            %li= link_to current_user.email, edit_user_registration_path
+            %li= link_to "Log out", destroy_user_session_path, method: :delete
+          - else
+            / Not signed in
+            %li= link_to "Log in", new_user_session_path
+
+    .container
+      %p.notice= notice
+      %p.alert= alert
+
+      = yield
