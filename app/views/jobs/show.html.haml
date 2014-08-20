@@ -1,5 +1,16 @@
 = link_to "Back", jobs_path, class: "btn btn-default"
 
+/ Ruby function that generates an a tag
+- if current_user == @job.author
+  = link_to "Edit", edit_job_path(@job), class: "btn btn-default"
+
+/ Nests a inside a div w/ class .btn
+/ .btn.btn-default= link_to "Google", "http://google.com"
+
+/ Works
+/ Haml tag with a class: %a.btn.btn-default { href: edit_job_path(@job) }
+
+
 %h1
   = @job.title
   %small= @job.author.email
