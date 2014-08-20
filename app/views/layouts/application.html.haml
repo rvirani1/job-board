@@ -6,7 +6,10 @@
     = stylesheet_link_tag "//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"
     = stylesheet_link_tag 'application', media: 'all'
 
+    = javascript_include_tag "//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"
+    = javascript_include_tag "//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"
     = javascript_include_tag 'application'
+
     = csrf_meta_tags
 
   %body
@@ -28,7 +31,11 @@
             %li= link_to "Log in", new_user_session_path
 
     .container
-      %p.notice= notice
-      %p.alert= alert
+      .flash
+        - flash.each do |name, msg|
+          %div{ :class => "alert alert-#{flash_class name}" }
+            %a.close{ "data-dismiss" => "alert" } &times;
+            %div{ :id => "flash_#{flash_class name}" }
+              = msg
 
       = yield
