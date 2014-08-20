@@ -75,4 +75,11 @@ class JobsController < ApplicationController
     # For now, reuse
     create_params
   end
+  
+  def mark_unread
+    r = current_user.reads.find_by_job_id params[:id]
+    r.destroy!
+    redirect_to jobs_path
+  end
+
 end
