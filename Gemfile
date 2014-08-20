@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '2.1.2'
+
 
 gem 'rails', '4.1.4'
 gem 'pg'
@@ -11,7 +13,6 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise'
-gem 'erb2haml'
 gem 'figaro'
 
 group :development do
@@ -22,6 +23,7 @@ group :development do
   gem 'quiet_assets'
   gem 'spring'
   gem 'bullet'
+  gem 'erb2haml'
 end
 
 group :production do
