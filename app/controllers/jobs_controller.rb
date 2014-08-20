@@ -35,11 +35,15 @@ class JobsController < ApplicationController
   end
 
   def edit
-    @job = Job.find params[:id]
+    # @job = Job.find params[:id]
+    # raise "NOPE" if @job.user != current_user
+
+    # only find jobs for current_user
+    @job = current_user.jobs.find params[:id]
   end
 
   def update
-    @job = Job.find params[:id]
+    @job = current_user.jobs.find params[:id]
     # update sets all the attributes from this hash
     # and then calls save (so returns true iff the
     # object saved without validation errors)
