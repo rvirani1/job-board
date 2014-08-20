@@ -34,8 +34,35 @@ class JobsController < ApplicationController
     end
   end
 
+  def edit
+    @job = Job.find params[:id]
+  end
+
+  def update
+    @job = Job.find params[:id]
+    # update sets all the attributes from this hash
+    # and then calls save (so returns true iff the
+    # object saved without validation errors)
+    #   @job.title = params[:job][:title]
+    #   @job.description = params[:job][:description]
+    #   ...
+    #   @job.save
+    if @job.update update_params
+      # Job was updated with new params
+      redirect_to @job, notice: "Your notice was updated"
+    else
+      # Validation errors, redisplay
+      render :edit
+    end
+  end
+
   def create_params
     params.require(:job).permit(:title, :description,
                                 :start_date, :end_date)
+  end
+
+  def update_params
+    # For now, reuse
+    create_params
   end
 end
