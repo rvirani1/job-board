@@ -1,6 +1,13 @@
 - if current_user
   = link_to "Post New Job", new_job_path, class: "btn btn-primary"
 
+- if params[:status] == "read"
+  = link_to "Show Unread Only", jobs_path(:status => "unread"), class: "btn btn-default"
+  %h1 Previously Read Jobs
+- else 
+  = link_to "Show Read Only", jobs_path(:status => "read"), class: "btn btn-default"
+  %h1 Unread Jobs
+
 %table.table.table-striped
   %thead
     %tr

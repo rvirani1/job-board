@@ -5,7 +5,13 @@ class JobsController < ApplicationController
   # before_action :authenticate_user!, only: [:new, :create]
 
   def index
-    @jobs = Job.all - current_user.read_jobs 
+    if params[:status] == "all"
+      @jobs = Job.all
+    elsif params[:status] == "read"
+      @jobs = current_user.read_jobs
+    else
+      @jobs = Job.all - current_user.read_jobs
+    end
   end
 
   def show
