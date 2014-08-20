@@ -1,4 +1,8 @@
 = link_to "Back", jobs_path, class: "btn btn-default"
+- if current_user.has_favorited?(@job)
+  = link_to "Unfavorite", job_favorites_path(@job), class: "btn btn-danger", method: :delete
+- else
+  = link_to "Favorite", job_favorites_path(@job), class: "btn btn-success", method: :post
 
 %h1
   = @job.title
