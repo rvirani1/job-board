@@ -1,11 +1,15 @@
-- if current_user
-  = link_to "Post New Job", new_job_path, class: "btn btn-primary"
+.row
+  .col-md-3
+    - if current_user
+      = link_to "Post New Job", new_job_path, class: "btn btn-primary pull-left"
+  .col-md-3
+  .col-md-3
+  .col-md-3
+    - if params[:status] == "read"
+      = link_to "Show Unread Only", jobs_path(:status => "unread"), class: "btn btn-default pull-right"
+      -heading = "Previously Read Jobs"
+    - else
+      = link_to "Show Read Only", jobs_path(:status => "read"), class: "btn btn-default pull-right"
+      -heading = "Unread Jobs"
 
-- if params[:status] == "read"
-  = link_to "Show Unread Only", jobs_path(:status => "unread"), class: "btn btn-default"
-  %h1 Previously Read Jobs
-- else
-  = link_to "Show Read Only", jobs_path(:status => "read"), class: "btn btn-default"
-  %h1 Unread Jobs
-
-= render :partial => 'shared/jobslist', :locals => {jobs: @jobs}
+= render :partial => 'shared/jobslist', :locals => {jobs: @jobs, heading: heading}

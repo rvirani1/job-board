@@ -7,7 +7,7 @@ class JobsController < ApplicationController
   before_action :check_job_author, only: [:edit, :update, :destroy]
 
   def index
-    if params[:status] == "all"
+    if (params[:status] == "all") || !current_user
       @jobs = Job.all
     elsif params[:status] == "read"
       @jobs = current_user.read_jobs
