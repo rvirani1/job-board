@@ -14,6 +14,8 @@
 
 class Job < ActiveRecord::Base
   validates_presence_of :title, :description, :user_id
+  include PgSearch
+  pg_search_scope :search_for_jobs, :against => [:title, :description]
 
   def self.active
     now   = Time.now

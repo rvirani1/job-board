@@ -5,7 +5,11 @@ class JobsController < ApplicationController
   # before_action :authenticate_user!, only: [:new, :create]
 
   def index
-    @jobs = Job.active
+    if params[:search]
+      @jobs = Job.search_for_jobs( params[:search])
+    else
+      @jobs = Job.all
+    end
   end
 
   def show
