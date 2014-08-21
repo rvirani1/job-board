@@ -5,7 +5,8 @@
 - else
   = link_to job_favorites_path(@job), class: "btn btn-success", method: :post do
     %i.fa.fa-star
-
+- if current_user.has_read?(@job)
+  = link_to "Mark Unread", mark_unread_job_path(@job), class: 'btn btn-default' , method: :patch
 / Ruby function that generates an a tag
 - if current_user == @job.author
   = link_to "Edit", edit_job_path(@job), class: "btn btn-default"

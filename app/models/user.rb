@@ -35,6 +35,9 @@ class User < ActiveRecord::Base
   #   has favorited, but there is a name collision
   belongs_to :company
 
+  has_many :reads
+  has_many :read_jobs, through: :reads, source: :job
+
   def has_favorited?(job)
     # favorited_jobs.to_a.any? { |fav| fav.job == job }
     favorites.where(job: job).exists?
@@ -42,5 +45,9 @@ class User < ActiveRecord::Base
 
   def self.no_company
     User.where(company: nil)
+  end
+
+  def has_read?(job)
+    reads.where(job: job).exists?
   end
 end

@@ -42,6 +42,13 @@ ActiveRecord::Schema.define(version: 20140821170314) do
     t.string   "company_id"
   end
 
+  create_table "reads", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "job_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
