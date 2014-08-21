@@ -6,6 +6,10 @@
       - @job.errors.full_messages.each do |error|
         %li= error
 
+  .form_group
+    = f.label :company
+    = f.text_field :company, value: current_user.company.name , class: "form-control", disabled: "disabled"
+
   .form-group
     = f.label :title
     = f.text_field :title, class: "form-control"

@@ -18,13 +18,15 @@
         .navbar-header
           = link_to "ATLRUG Jobs", root_path, class: "navbar-brand"
 
+        -# Links to site pages
         %ul.nav.navbar-nav
-          / Main links will go here
+          %li= link_to "Jobs", jobs_path
+          %li= link_to "Companies", companies_path
 
         %ul.nav.navbar-nav.pull-right
           - if current_user
             / Signed in
-            %li= link_to current_user.email, edit_user_registration_path
+            %li= link_to "#{current_user.email} (#{company_display})", edit_user_registration_path
             %li= link_to "Log out", destroy_user_session_path, method: :delete
           - else
             / Not signed in

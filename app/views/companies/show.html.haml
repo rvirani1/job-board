@@ -1,0 +1,12 @@
+.row
+  .col-md-4
+    .well Put an image here
+  .col-md-8
+    .panel.panel-default
+      .panel-heading.clearfix
+        %h4.inline= @company.name
+        -if @company.users.include?(current_user)
+          = link_to "Settings", edit_company_path(@company), class: "btn btn-default pull-right"
+      .panel-body= @company.description
+.row
+  = render partial: "shared/jobslist", locals: {jobs: @jobs}

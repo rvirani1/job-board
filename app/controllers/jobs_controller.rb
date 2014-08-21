@@ -4,6 +4,8 @@ class JobsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   # before_action :authenticate_user!, only: [:new, :create]
 
+  before_action :check_job_author, only: [:edit, :update, :destroy]
+
   def index
     @jobs = Job.active
   end
@@ -24,6 +26,7 @@ class JobsController < ApplicationController
     #   @job = Job.new create_params
     # This sets user_id for the newly created job
     @job = current_user.jobs.new create_params
+    @job.company = current_user.company
     if @job.save
       # Saved the record, now show it?
       # By redirecting to the show action
@@ -60,13 +63,22 @@ class JobsController < ApplicationController
     end
   end
 
+  ##TODO Create destroy action that destroys if user is part of the same company
+  def destroy
+    redirect_to root_path
+  end
+
+  private
+
   def create_params
+    binding.pry
     params.require(:job).permit(:title, :description,
-                                :start_date, :end_date)
+                                :start_date, :end_date, :company)
   end
 
   def update_params
     # For now, reuse
     create_params
   end
+
 end

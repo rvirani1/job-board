@@ -19,7 +19,8 @@
 
 %h1
   = @job.title
-  %small= @job.author.email
+  -binding.pry
+  %small= @job.company.name
 
 .well
   = @job.description

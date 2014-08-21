@@ -1,5 +1,6 @@
 class Favorite < ActiveRecord::Base
   validates_presence_of :user, :job
+  validates_uniqueness_of :user, :scope => [:job]
 
   belongs_to :user # defines favorite.user
   belongs_to :job  # defines favorite.job

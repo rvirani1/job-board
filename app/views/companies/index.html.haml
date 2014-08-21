@@ -1,0 +1,16 @@
+- if current_user && !current_user.company
+  = link_to "Create Company", new_company_path, class: "btn btn-primary"
+
+-#TODO add pagination to this
+.row
+  %table.table.table-striped
+    %thead
+      %tr
+        %th.col-md-3 Name
+        %th.col-md-9 Description
+    %tbody
+      - @companies.each do |company|
+        %tr
+          %td.col-md-3= link_to company.name, company
+          %td.col-md-3= link_to company.description, company
+

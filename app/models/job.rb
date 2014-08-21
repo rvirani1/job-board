@@ -14,6 +14,7 @@
 
 class Job < ActiveRecord::Base
   validates_presence_of :title, :description, :user_id
+  belongs_to :company
 
   def self.active
     now   = Time.now

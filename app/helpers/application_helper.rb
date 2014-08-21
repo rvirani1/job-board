@@ -10,4 +10,12 @@ module ApplicationHelper
       name
     end
   end
+
+  def company_display
+    if current_user.company
+      current_user.company.name
+    else
+      "No Company"
+    end
+  end
 end

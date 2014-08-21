@@ -1,0 +1,19 @@
+= form_tag route, method: method.to_sym, class: "form", multipart: true do
+  - if company.errors.any?
+    / Display errors
+    %p There were errors!
+    %ul
+      - company.errors.full_messages.each do |error|
+        %li= error
+  .form-group
+    = label_tag 'name'
+    = text_field_tag 'name', nil, placeholder: "Enter your name here", class: "form-control"
+
+  .form-group
+    = label_tag 'description'
+    = text_area_tag 'description', nil, placeholder: "Enter your description here", rows: 5, class: "form-control"
+
+  .form-group
+    = select_tag "selectedusers", users_select_list(company), multiple: true, placeholder: "Add Users", class: "selectize-control tag-selector"
+  .form-group
+    = submit_tag "Create/Update Company", class: "button btn btn-primary"

@@ -5,5 +5,7 @@ Rails.application.routes.draw do
     resource :favorites, only: [:create, :destroy]
   end
 
+  resources :companies
+
   root to: "application#home"
 end

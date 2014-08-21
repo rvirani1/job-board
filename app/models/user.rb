@@ -33,9 +33,14 @@ class User < ActiveRecord::Base
     source: :job
   # ^- we want this to describe jobs that the user
   #   has favorited, but there is a name collision
+  belongs_to :company
 
   def has_favorited?(job)
     # favorited_jobs.to_a.any? { |fav| fav.job == job }
     favorites.where(job: job).exists?
+  end
+
+  def self.no_company
+    User.where(company: nil)
   end
 end
