@@ -15,6 +15,9 @@ class JobsController < ApplicationController
   end
 
   def new
+    unless current_user.company
+      redirect_to new_company_path, notice: "You must join a company before posting a job"
+    end
     @job = Job.new(
       start_date: Time.now,
       end_date:   Time.now + 1.week

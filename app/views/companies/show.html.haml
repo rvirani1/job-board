@@ -10,3 +10,5 @@
       .panel-body= @company.description
 .row
   = render partial: "shared/jobslist", locals: {jobs: @jobs}
+.row
+  = render partial: "shared/companyuserslist", locals: {users: @company.users}

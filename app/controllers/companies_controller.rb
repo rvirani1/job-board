@@ -39,7 +39,22 @@ class CompaniesController < ApplicationController
   end
 
   def update
+
+
     #TODO make a way to update a company's data
+    company = Company.find params[:id]
+    unless params[:selectedusers]
+      redirect_to edit_company_path(company), alert: "Company must have at least one user"
+    end
+    company.name = params[:name]
+    company.description = params[:description]
+    company.update_users params[:selectedusers]
+
+    if company.save
+      redirect_to company_path(company), notice: "Company was updated!"
+    else
+      redirect_to edit_company_path(company), alert: "Company was not updated!"
+    end
   end
 
   def destroy

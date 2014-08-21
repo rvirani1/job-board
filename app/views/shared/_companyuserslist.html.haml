@@ -1,0 +1,12 @@
+.row
+  .col-md-12
+    %h3 Users
+.row
+  %table.table.table-striped
+    %thead
+      %tr
+        %th.col-md-12 Email
+    %tbody
+      -users.each do |user|
+        %tr
+          %td.col-md-12= user.email
