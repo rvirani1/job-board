@@ -1,4 +1,8 @@
 class FavoritesController < ApplicationController
+  def index
+    @jobs = current_user.favorited_jobs.includes(:company).paginate(:page => params[:page], :per_page => 5)
+  end
+
   def create
     # Because of the routing / url I have
     #   params[:job_id]
