@@ -3,13 +3,12 @@ class CompaniesController < ApplicationController
   before_action :set_companies
 
   def index
-    #TODO Build page to show all companies
-    #TODO make sure that navigation has a way to get here
+
   end
 
   def show
     @comp = Company.find(params[:id])
-    @jobs = @comp.jobs
+    @jobs = @comp.jobs.paginate(:page => params[:page], :per_page => 5)
   end
 
   def new
@@ -71,6 +70,6 @@ class CompaniesController < ApplicationController
   end
 
   def set_companies
-    @companies = Company.all
+    @companies = Company.all.paginate(:page => params[:page], :per_page => 5)
   end
 end

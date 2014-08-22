@@ -10,12 +10,13 @@ class JobsController < ApplicationController
     if params[:search]
        @jobs = Job.search_for_jobs(params[:search])
     elsif params[:status] == "read" && current_user
-      @jobs = current_user.read_jobs.includes(:company)
+      @jobs = current_user.read_jobs
     elsif current_user
-      @jobs = current_user.unread_jobs.includes(:company)
+      @jobs = current_user.unread_jobs
     else
-      @jobs = Job.includes(:company)
+      @jobs = Job.all
     end
+    @jobs = @jobs.includes(:company).paginate(page: params[:page], per_page: 5)
   end
 
   def show

@@ -14,6 +14,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise'
 gem 'figaro'
 gem 'pg_search'
+gem 'will_paginate', '~> 3.0'
 
 group :development do
   gem 'annotate'

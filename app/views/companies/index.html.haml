@@ -6,6 +6,8 @@
   .col-md-12
     %h3 All Companies
 .row
+  .apple_pagination
+    = will_paginate @companies
   %table.table.table-striped
     %thead
       %tr
@@ -16,4 +18,5 @@
         %tr
           %td.col-md-3= link_to company.name, company
           %td.col-md-3= link_to company.description, company
-
+  .apple_pagination
+    = will_paginate @companies
