@@ -22,7 +22,7 @@ group :development do
   gem 'pry-rails'
   gem 'quiet_assets'
   gem 'spring'
-  # gem 'bullet'
+  gem 'bullet'
   gem 'erb2haml'
 end
 

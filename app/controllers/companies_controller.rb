@@ -9,7 +9,7 @@ class CompaniesController < ApplicationController
 
   def show
     @comp = Company.find(params[:id])
-    @jobs = @comp.jobs.includes(:company)
+    @jobs = @comp.jobs
   end
 
   def new
