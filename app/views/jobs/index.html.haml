@@ -3,6 +3,9 @@
     - if current_user
       = link_to "Post New Job", new_job_path, class: "btn btn-primary pull-left"
   .col-md-3
+    = form_tag(jobs_path(@jobs), method: :get, id: :search_form, class: 'form-search') do
+      = search_field_tag "search", params[:search], class: "form-control"
+      = submit_tag 'search', class: "btn btn-default"
   .col-md-3
   .col-md-3
     - if params[:status] == "read"

@@ -11,8 +11,12 @@ class JobsController < ApplicationController
       @jobs = Job.all
     elsif params[:status] == "read"
       @jobs = current_user.read_jobs
-    else
+    elsif
       @jobs = Job.all - current_user.read_jobs
+    elsif params[:search]
+      @jobs = Job.search_for_jobs( params[:search])
+    else
+      @jobs = Job.all
     end
   end
 
