@@ -10,6 +10,6 @@
           = link_to "Delete Company", company_path, method: :delete, class: "btn btn_default pull-right", confirm: 'Are you sure you want to delete this company and all of its jobs?'
       .panel-body= @company.description
 .row
-  = render partial: "shared/jobslist", locals: {jobs: @jobs}
+  = render partial: "shared/jobslist", locals: {jobs: @jobs, heading: "#{@company.name} Jobs"}
 .row
   = render partial: "shared/companyuserslist", locals: {users: @company.users}
