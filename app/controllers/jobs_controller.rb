@@ -7,16 +7,12 @@ class JobsController < ApplicationController
   before_action :check_job_author, only: [:edit, :update, :destroy]
 
   def index
-    if (params[:status] == "all") || !current_user
-      @jobs = Job.includes(:company)
-    elsif params[:status] == "read"
+    if params[:search]
+       @jobs = Job.search_for_jobs(params[:search])
+    elsif params[:status] == "read" && current_user
       @jobs = current_user.read_jobs.includes(:company)
-    elsif
+    elsif current_user
       @jobs = current_user.unread_jobs.includes(:company)
-          # (Job.all - current_user.read_jobs).includes(:company)
-    elsif params[:search]
-      @jobs = Job.search_for_jobs(params[:search])
-      fail
     else
       @jobs = Job.includes(:company)
     end
@@ -24,7 +20,7 @@ class JobsController < ApplicationController
 
   def show
     @job = Job.find params[:id]
-    if current_user && !current_user.has_read?(@job)
+    if (current_user) && (!current_user.has_read? @job)
       r = Read.new
       r.job_id = @job.id
       r.user_id = current_user.id
@@ -89,6 +85,12 @@ class JobsController < ApplicationController
     redirect_to root_path
   end
 
+  def mark_unread
+    r = current_user.reads.find_by_job_id params[:id]
+    r.destroy!
+    redirect_to jobs_path
+  end
+
   private
 
   def create_params
@@ -99,12 +101,6 @@ class JobsController < ApplicationController
   def update_params
     # For now, reuse
     create_params
-  end
-
-  def mark_unread
-    r = current_user.reads.find_by_job_id params[:id]
-    r.destroy!
-    redirect_to jobs_path
   end
 
 end
