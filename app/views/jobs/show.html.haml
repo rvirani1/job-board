@@ -1,15 +1,16 @@
 = link_to "Back", jobs_path, class: "btn btn-default"
-- if current_user.has_favorited?(@job)
-  = link_to job_favorites_path(@job), class: "btn btn-danger", method: :delete do
-    %i.fa.fa-star-o
-- else
-  = link_to job_favorites_path(@job), class: "btn btn-success", method: :post do
-    %i.fa.fa-star
-- if current_user.has_read?(@job)
-  = link_to "Mark Unread", mark_unread_job_path(@job), class: 'btn btn-default' , method: :patch
-/ Ruby function that generates an a tag
-- if current_user == @job.author
-  = link_to "Edit", edit_job_path(@job), class: "btn btn-default"
+- if current_user
+  - if current_user.has_favorited?(@job)
+    = link_to job_favorites_path(@job), class: "btn btn-danger", method: :delete do
+      %i.fa.fa-star-o
+  - else
+    = link_to job_favorites_path(@job), class: "btn btn-success", method: :post do
+      %i.fa.fa-star
+  - if current_user.has_read?(@job)
+    = link_to "Mark Unread", mark_unread_job_path(@job), class: 'btn btn-default' , method: :patch
+  / Ruby function that generates an a tag
+  - if current_user == @job.author
+    = link_to "Edit", edit_job_path(@job), class: "btn btn-default"
 
 / Nests a inside a div w/ class .btn
 / .btn.btn-default= link_to "Google", "http://google.com"
@@ -20,7 +21,6 @@
 
 %h1
   = @job.title
-  -binding.pry
   %small= @job.company.name
 
 .well

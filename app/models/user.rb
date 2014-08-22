@@ -38,6 +38,10 @@ class User < ActiveRecord::Base
   has_many :reads
   has_many :read_jobs, through: :reads, source: :job
 
+  def unread_jobs
+    Job.all.where.not(:id => self.read_jobs)
+  end
+
   def has_favorited?(job)
     # favorited_jobs.to_a.any? { |fav| fav.job == job }
     favorites.where(job: job).exists?

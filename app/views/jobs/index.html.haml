@@ -2,11 +2,11 @@
   .col-md-3
     - if current_user
       = link_to "Post New Job", new_job_path, class: "btn btn-primary pull-left"
-  .col-md-3
+  .col-md-6
     = form_tag(jobs_path(@jobs), method: :get, id: :search_form, class: 'form-search') do
-      = search_field_tag "search", params[:search], class: "form-control"
-      = submit_tag 'search', class: "btn btn-default"
-  .col-md-3
+      .input-group
+        = search_field_tag "search", params[:search], class: "form-control inline"
+        %span.input-group-btn= submit_tag 'Search', class: "btn btn-default inline pull-right"
   .col-md-3
     - if params[:status] == "read"
       = link_to "Show Unread Only", jobs_path(:status => "unread"), class: "btn btn-default pull-right"

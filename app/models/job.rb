@@ -15,6 +15,7 @@
 class Job < ActiveRecord::Base
   validates_presence_of :title, :description, :user_id
   belongs_to :company
+  has_many :reads
   include PgSearch
   pg_search_scope :search_for_jobs, :against => [:title, :description]
 

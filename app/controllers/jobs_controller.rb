@@ -8,21 +8,23 @@ class JobsController < ApplicationController
 
   def index
     if (params[:status] == "all") || !current_user
-      @jobs = Job.all
+      @jobs = Job.includes(:company)
     elsif params[:status] == "read"
-      @jobs = current_user.read_jobs
+      @jobs = current_user.read_jobs.includes(:company)
     elsif
-      @jobs = Job.all - current_user.read_jobs
+      @jobs = current_user.unread_jobs.includes(:company)
+          # (Job.all - current_user.read_jobs).includes(:company)
     elsif params[:search]
-      @jobs = Job.search_for_jobs( params[:search])
+      @jobs = Job.search_for_jobs(params[:search])
+      fail
     else
-      @jobs = Job.all
+      @jobs = Job.includes(:company)
     end
   end
 
   def show
     @job = Job.find params[:id]
-    if !current_user.has_read? @job
+    if current_user && !current_user.has_read?(@job)
       r = Read.new
       r.job_id = @job.id
       r.user_id = current_user.id
@@ -90,7 +92,6 @@ class JobsController < ApplicationController
   private
 
   def create_params
-    binding.pry
     params.require(:job).permit(:title, :description,
                                 :start_date, :end_date, :company)
   end
