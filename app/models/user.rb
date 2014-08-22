@@ -47,6 +47,10 @@ class User < ActiveRecord::Base
     User.where(company: nil)
   end
 
+  def unread_jobs
+    Job.all.where.not(:id => self.read_jobs)
+  end
+
   def has_read?(job)
     reads.where(job: job).exists?
   end
