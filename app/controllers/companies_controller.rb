@@ -1,5 +1,5 @@
 class CompaniesController < ApplicationController
-  before_action :check_user_authorization, :except => [:index, :new]
+  before_action :check_user_authorization, :except => [:index, :new, :show]
   before_action :set_companies
 
   def index
@@ -8,10 +8,9 @@ class CompaniesController < ApplicationController
   end
 
   def show
-    @company = Company.find(params[:id])
-    @jobs = @company.jobs
+    @comp = Company.find(params[:id])
+    @jobs = @comp.jobs.includes(:company)
   end
-
 
   def new
     #TODO should be able to get to here from the user profile page if they don't have a company
