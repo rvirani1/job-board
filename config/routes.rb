@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   resources :companies
 
-  resource :profiles, only: [:edit, :create, :destroy]
+  resources :profiles
 
   root to: "application#home"
 end
