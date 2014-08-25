@@ -8,11 +8,13 @@ class JobsController < ApplicationController
 
   def index
     if params[:search]
-       @jobs = Job.search_for_jobs(params[:search])
+      @jobs = Job.search_for_jobs(params[:search])
     elsif params[:status] == "read" && current_user
       @jobs = current_user.read_jobs
-    elsif current_user
+    elsif params[:status] == "unread" && current_user
       @jobs = current_user.unread_jobs
+    elsif params[:status] == "favorited" && current_user
+      @jobs = current_user.favorited_jobs
     else
       @jobs = Job.all
     end

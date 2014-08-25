@@ -1,5 +1,5 @@
 .row
-  .col-md-3
+  .col-md-2
     - if current_user
       = link_to "Post New Job", new_job_path, class: "btn btn-primary pull-left"
   .col-md-6
@@ -7,16 +7,30 @@
       .input-group
         = search_field_tag "search", params[:search], class: "form-control inline"
         %span.input-group-btn= submit_tag 'Search', class: "btn btn-default inline pull-right"
-  .col-md-3
-    - if params[:status] == "read"
-      = link_to "Show Unread Only", jobs_path(:status => "unread"), class: "btn btn-default pull-right"
-      -heading = "Previously Read Jobs"
-    - else
-      = link_to "Show Read Only", jobs_path(:status => "read"), class: "btn btn-default pull-right"
-      -heading = "Unread Jobs"
-
-= render :partial => 'shared/jobslist', :locals => {jobs: @jobs, heading: heading}
-
-
-
-
+  .col-md-4
+    .btn-group.pull-right
+      =link_to jobs_path do
+        -if params[:status] == nil
+          - allstyle = "thick"
+        %button.btn.btn-default{:type => "button"}
+          %span{:class => allstyle || ""} All
+      =link_to jobs_path(:status => "read") do
+        -if params[:status] == "read"
+          - readstyle = "thick"
+          - @heading = "Read Jobs"
+        %button.btn.btn-default{:type => "button"}
+          %span{:class => readstyle || ""} Read
+      =link_to jobs_path(:status => "unread") do
+        -if params[:status] == "unread"
+          - unreadstyle = "thick"
+          - @heading = "Unread Jobs"
+        %button.btn.btn-default{:type => "button"}
+          %span{:class => unreadstyle || "" } Unread
+      =link_to jobs_path(:status => "favorited") do
+        -if params[:status] == "favorited"
+          - favstyle = "thick"
+          - @heading = "Favorited Jobs"
+        %button.btn.btn-default{:type => "button"}
+          %span{:class => favstyle || ""} Favorites
+- @heading ||= "All Jobs"
+= render :partial => 'shared/jobslist', :locals => {jobs: @jobs, heading: @heading}
