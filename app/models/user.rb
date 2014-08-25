@@ -23,6 +23,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  has_one :profile
+
   # This defines user.jobs to be the relation of all of this
   #   user's jobs
   has_many :jobs

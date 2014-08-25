@@ -1,0 +1,28 @@
+- if current_user.id == @profile.user_id
+  = form_for @profile, class: "form" do |f|
+    - if @profile.errors.any?
+      %p There were errors!
+      %ul
+        - @profile.errors.full_messages.each do |error|
+          %li=error
+
+    .form_group
+      = f.label :username
+      = f.text_field :username, class: "form-control"
+
+    .form_group
+      = f.label :first_name
+      = f.text_field :first_name, class: "form-control"
+  
+    .form_group
+      = f.label :last_name
+      = f.text_field :last_name, class: "form-control"
+
+    .form_group
+      = f.label :timezone
+      = time_zone_select( "profile", 'timezone', ActiveSupport::TimeZone.us_zones)
+      -#= f.text_field :timezone, class: "form-control"
+
+    %button.btn.bnt_primary Update Profile 
+- else
+  %p Permission Denied
