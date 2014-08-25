@@ -27,6 +27,7 @@
           - if current_user
             / Signed in
             %li= link_to "#{current_user.email} (#{company_display})", edit_user_registration_path
+            %li= link_to "Show Profile", profile_path(current_user.profile)
             %li= link_to "Edit Profile", edit_profile_path(current_user.profile)
             %li= link_to "Log out", destroy_user_session_path, method: :delete
           - else

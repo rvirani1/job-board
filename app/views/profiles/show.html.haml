@@ -3,3 +3,5 @@
 %h2= @profile.first_name
 %h2= @profile.last_name
 %h2= @profile.timezone
+
+= image_tag avatar_url(@profile.user)
