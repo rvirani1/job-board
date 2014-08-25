@@ -36,6 +36,7 @@ group :production do
 end
 
 group :test do
+  gem 'minitest'
   gem 'rspec-rails'
   gem 'capybara'
   gem 'nokogiri'
