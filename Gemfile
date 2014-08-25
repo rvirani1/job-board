@@ -16,6 +16,10 @@ gem 'figaro'
 gem 'pg_search'
 gem 'will_paginate', '~> 3.0'
 
+group :development, :test do
+  gem 'factory_girl_rails'
+end
+
 group :development do
   gem 'annotate'
   gem 'better_errors'
@@ -29,4 +33,12 @@ end
 
 group :production do
   gem 'rails_12factor'
+end
+
+group :test do
+  gem 'rspec-rails'
+  gem 'capybara'
+  gem 'nokogiri'
+  gem 'launchy'
+  gem 'simplecov'
 end
