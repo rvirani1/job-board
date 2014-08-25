@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  get 'favorites' => 'favorites#index'
+  # get 'favorites' => 'favorites#index'
 
   resources :jobs do
     member do
