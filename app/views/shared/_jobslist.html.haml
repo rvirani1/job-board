@@ -28,8 +28,7 @@
                   %i.fa.fa-star
           %td.col-md-5= link_to job.title, job
           %td.col-md-2= link_to job.company.name, job.company
-          %td.col-md-2= job.author.email
+          %td.col-md-2= link_to job.author.email, profile_path(job.author.id)
           %td.col-md-2= job.end_date
   .apple_pagination
     = will_paginate jobs
-

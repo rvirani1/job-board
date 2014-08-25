@@ -30,6 +30,8 @@
             %li
               =link_to favorites_path, class: "btn btn-warning" do
                 %i.fa.fa-star-o &nbsp Favorites
+            %li= link_to "Show Profile", profile_path(current_user.profile)
+            %li= link_to "Edit Profile", edit_profile_path(current_user.profile)
             %li= link_to "Log out", destroy_user_session_path, method: :delete
           - else
             / Not signed in

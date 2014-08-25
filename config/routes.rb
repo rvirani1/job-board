@@ -12,5 +12,7 @@ Rails.application.routes.draw do
 
   resources :companies
 
+  resources :profiles
+
   root to: "application#home"
 end
