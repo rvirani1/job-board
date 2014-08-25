@@ -1,7 +1,6 @@
-%h1 show profile
-%h2= @profile.username
-%h2= @profile.first_name
-%h2= @profile.last_name
-%h2= @profile.timezone
 
 = image_tag avatar_url(@profile.user)
+%p= "#{@profile.first_name} #{@profile.last_name}"
+%p= @profile.username
+%p= @profile.timezone
+
