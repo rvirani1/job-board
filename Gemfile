@@ -41,4 +41,6 @@ group :test do
   gem 'nokogiri'
   gem 'launchy'
   gem 'simplecov'
+  gem 'minitest'
+  gem 'shoulda-matchers'
 end
