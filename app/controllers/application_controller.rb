@@ -8,8 +8,8 @@ class ApplicationController < ActionController::Base
       new_profile = Profile.new
       new_profile.user_id = current_user.id
       new_profile.save!
-      redirect_to edit_profile_path new_profile 
-    else  
+      redirect_to edit_profile_path new_profile
+    else
       redirect_to jobs_path
     end
   end

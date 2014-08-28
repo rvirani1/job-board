@@ -8,7 +8,17 @@ class JobsController < ApplicationController
 
   def index
     if params[:search]
-      @jobs = Job.search_for_jobs(params[:search])
+      job_results = []
+      comp_results = []
+      PgSearch.multisearch(params[:search]).each do |result|
+        if result.searchable_type == "Job"
+          binding.pry
+          job_results << result.searchable_id
+        else
+          comp_results << result.searchable_id
+        end
+      end
+      @jobs = Job.all.where("id IN (?) OR company_id IN (?)", job_results, comp_results)
     elsif params[:status] == "read" && current_user
       @jobs = current_user.read_jobs
     elsif params[:status] == "unread" && current_user

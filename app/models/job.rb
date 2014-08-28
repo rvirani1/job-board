@@ -10,6 +10,7 @@
 #  user_id     :integer
 #  created_at  :datetime
 #  updated_at  :datetime
+#  company_id  :string(255)
 #
 
 class Job < ActiveRecord::Base
@@ -17,7 +18,7 @@ class Job < ActiveRecord::Base
   belongs_to :company
   has_many :reads
   include PgSearch
-  pg_search_scope :search_for_jobs, :against => [:title, :description]
+  multisearchable :against => [:title, :description]
 
   def self.active
     now   = Time.now
