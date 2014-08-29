@@ -3,7 +3,21 @@ class CompaniesController < ApplicationController
   before_action :set_companies
 
   def index
-
+    if params[:search]
+      comp_results = []
+      PgSearch.multisearch(params[:search]).each do |result|
+        if result.searchable_type == "Job"
+          comp_results << result.searchable.company.id
+        else
+          comp_results << result.searchable_id
+        end
+      end
+      @companies = Company.where(id: comp_results)
+      binding.pry
+    else
+      @companies = Company.all
+    end
+    @companies = @companies.paginate(page: params[:page], per_page: 5)
   end
 
   def show

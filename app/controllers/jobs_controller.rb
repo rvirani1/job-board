@@ -12,7 +12,6 @@ class JobsController < ApplicationController
       comp_results = []
       PgSearch.multisearch(params[:search]).each do |result|
         if result.searchable_type == "Job"
-          binding.pry
           job_results << result.searchable_id
         else
           comp_results << result.searchable_id

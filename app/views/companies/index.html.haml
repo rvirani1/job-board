@@ -1,5 +1,12 @@
-- if current_user && !current_user.company
-  = link_to "Create Company", new_company_path, class: "btn btn-primary"
+.row
+  .col-md-4
+    - if current_user && !current_user.company
+      = link_to "Create Company", new_company_path, class: "btn btn-primary"
+  .col-md-8
+    = form_tag( companies_path(@companies), method: :get, id: :search_form, class: 'form_search') do
+      .input-group
+        = search_field_tag "search", params[:search], class: "form-control inline"
+        %span.input-group-btn= submit_tag 'Search', class: "btn btn-default inline pull-right"
 
 -#TODO add pagination to this
 .row
