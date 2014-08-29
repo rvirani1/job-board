@@ -17,3 +17,4 @@
     = select_tag "selectedusers", users_select_list(company), multiple: true, placeholder: "Add Users", class: "selectize-control tag-selector", required: "required"
   .form-group
     = submit_tag "Create/Update Company", class: "button btn btn-primary"
+    = link_to "Cancel", :back, class: "btn btn-default"
